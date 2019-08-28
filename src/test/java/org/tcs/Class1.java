@@ -1,4 +1,7 @@
 package org.tcs;
+import java.util.List;
+import java.util.Map;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -30,18 +33,44 @@ public class Class1 {
 		driver.findElement(By.id("telephoneno")).sendKeys("9865182316");
 		driver.findElement(By.xpath("//input[@name='submit']")).click();  
 	}*/
-	@When("user will provide vaild details{string},{string},{string},{string},{string}")
+/*	@When("user will provide vaild details{string},{string},{string},{string},{string}")
 	public void user_will_provide_vaild_details(String fname, String lname, String email, String address, String phone) {	driver.findElement(By.xpath("//label[text()='Done']")).click();  
+		driver.findElement(By.xpath("//label[text()='Done']")).click(); 
 		driver.findElement(By.id("fname")).sendKeys(fname);
 		driver.findElement(By.id("lname")).sendKeys(lname);
 		driver.findElement(By.id("email")).sendKeys(email);
-		driver.findElement(By.xpath("//textarea[@name='addr']")).sendKeys(address);
+		driver.findElement(By.xpath(""//textarea[@name='addr']")).sendKeys(address);
 		driver.findElement(By.id("telephoneno")).sendKeys(phone);
 		driver.findElement(By.xpath("//input[@name='submit']")).click();
 	}
+*/	
+/*	@When("user will provide valid details")
+	public void user_will_provide_valid_details(io.cucumber.datatable.DataTable dataTable) {
+		List <String> oned= dataTable.asList(String.class);
+		System.out.println("one dimensional List");
+		driver.findElement(By.xpath("//label[text()='Done']"));
+		driver.findElement(By.id("fname")).sendKeys(oned.get(0));
+		driver.findElement(By.id("lname")).sendKeys(oned.get(1));
+		driver.findElement(By.id("email")).sendKeys(oned.get(2));
+		driver.findElement(By.id("address")).sendKeys(oned.get(3));
+		driver.findElement(By.id("phno")).sendKeys(oned.get(4));
+		driver.findElement(By.xpath("//input[@name='submit']")).click();
+		}*/
+	
+	@When("user will provide valid details")
+	public void user_will_provide_valid_details(io.cucumber.datatable.DataTable dataTable) {
+	 Map <String,String> asMap = dataTable.asMap(String.class, String.class);
+	 driver.findElement(By.xpath("//label[text()='Done']")).click(); 
+		driver.findElement(By.id("fname")).sendKeys("fname");
+		driver.findElement(By.id("lname")).sendKeys("lname");
+		driver.findElement(By.id("email")).sendKeys("email");
+		driver.findElement(By.xpath("//textarea[@name='addr']")).sendKeys("address");
+		driver.findElement(By.id("telephoneno")).sendKeys("phone");
+		driver.findElement(By.xpath("//input[@name='submit']")).click();
+	
+	 }
 	@Then("to verified the customer id is displayed")
 	public void to_verified_the_customer_id_is_displayed() {
 		Assert.assertTrue(driver.findElement(By.xpath("(//td[@align='center'])[2]")).isDisplayed());
 	}
-
 	}
